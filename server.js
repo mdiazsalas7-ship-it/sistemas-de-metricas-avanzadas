@@ -5,37 +5,31 @@ const path = require('path');
 const PORT = 3000;
 
 const server = http.createServer((req, res) => {
-  console.log('Solicitud recibida para: ' + req.url);
+    console.log(`Solicitud recibida para: ${req.url}`);
 
-  // Si entran a la raíz, les damos el dashboard.html
-  let filePath = '.' + req.url;
-  if (filePath === './') {
-    filePath = './dashboard.html';
-  }
+    if (req.url === '/') {
+        // AQUÍ ESTABA EL ERROR: Ahora buscamos index.html
+        const filePath = path.join(__dirname, 'index.html');
 
-  const extname = path.extname(filePath);
-  let contentType = 'text/html';
-
-  // Leemos el archivo del disco y lo enviamos al navegador
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code == 'ENOENT') {
-        res.writeHead(404);
-        res.end(
-          'Archivo no encontrado. Asegurate de haber corrido generar_web.js primero.'
-        );
-      } else {
-        res.writeHead(500);
-        res.end('Error interno del servidor: ' + error.code);
-      }
+        fs.readFile(filePath, (err, content) => {
+            if (err) {
+                res.writeHead(500);
+                res.end(`Error: No se encuentra 'index.html'. Ejecuta primero: node generar_web.js`);
+                console.error("❌ ERROR: No encuentro index.html");
+            } else {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(content, 'utf-8');
+            }
+        });
     } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
+        // Manejo básico para otros archivos (imagenes, etc)
+        res.writeHead(404);
+        res.end();
     }
-  });
 });
 
 server.listen(PORT, () => {
-  console.log(`\n🚀 SERVIDOR ACTIVO. Abre el navegador en el puerto ${PORT}`);
-  console.log(`👉 Estás viendo: dashboard.html\n`);
+    console.log(`\n🚀 SERVIDOR ACTIVO. Abre tu navegador aquí:`);
+    console.log(`👉 http://localhost:${PORT}`);
+    console.log(`   (Estás visualizando el archivo: index.html)\n`);
 });
