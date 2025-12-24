@@ -1,0 +1,18 @@
+{
+  "partido": {
+    "local": "Team A",
+    "visitante": "Team B"
+  },
+  "envivo": {
+    "historialacciones": []
+  },
+  "EnVivoJugadoresOTT": {
+    "JugadoresEnVivoLocal": [
+      {
+        "IdJugador": "P1",
+        "Nombre": "Jugador, Prueba"
+      }
+    ],
+    "JugadoresEnVivoVisitante": []
+  }
+}

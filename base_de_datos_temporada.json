@@ -1,0 +1,791 @@
+{
+  "1595": {
+    "nombre": "ANGULO SILVA, ALAN ANDRUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 2,
+    "blk": 0,
+    "pts": 0
+  },
+  "1613": {
+    "nombre": "MORALES LÓPEZ, SIMON ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "1618": {
+    "nombre": "BARRETO GARCIA, LUIS ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "1902": {
+    "nombre": "DIAZ PÉREZ, ALAN DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 2,
+    "blk": 0,
+    "pts": 0
+  },
+  "1936": {
+    "nombre": "BERROTERAN RODRÍGUEZ, DIEGO ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 7,
+    "blk": 0,
+    "pts": 0
+  },
+  "3505": {
+    "nombre": "LORCA VILLEGAS, JOSÉ FRANCISCO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "3544": {
+    "nombre": "CAMPERO HERNÁNDEZ, FABIAN EDUARDO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "3750": {
+    "nombre": "CONTRERAS ARAQUE, EDUARDO MATÍAS DANIEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "3776": {
+    "nombre": "FAJARDO HERNÁNDEZ, SANTIAGO DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 3,
+    "blk": 0,
+    "pts": 0
+  },
+  "3779": {
+    "nombre": "PALMA VALERIO, FRANCISCO JAVIER ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "4036": {
+    "nombre": "RUIZ MACHADO, ABRAHAM DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "4044": {
+    "nombre": "LIZARZABAL MEDINA, MOISES JOSIAS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 1,
+    "blk": 2,
+    "pts": 0
+  },
+  "4054": {
+    "nombre": "MARTINEZ ORTEGA, OWEN JONAS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 7,
+    "blk": 1,
+    "pts": 0
+  },
+  "4056": {
+    "nombre": "SANCHEZ CASTILLO, MAURO SANTIAGO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "4057": {
+    "nombre": "GUDIÑO SEIJAS, SANTIAGO DANIEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 7,
+    "blk": 0,
+    "pts": 0
+  },
+  "4058": {
+    "nombre": "LOPEZ ESPINOZA, EDWAR JOSE",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 3,
+    "blk": 0,
+    "pts": 0
+  },
+  "4263": {
+    "nombre": "VEGAS FELIU, KLEYDERMAN JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 2,
+    "blk": 0,
+    "pts": 0
+  },
+  "4741": {
+    "nombre": "TIMOZUK LÓPEZ , IVÁN ALEJANDRO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 3,
+    "blk": 1,
+    "pts": 0
+  },
+  "5308": {
+    "nombre": "PEDRON BETANCOURT, LUIS ANTONIO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "5316": {
+    "nombre": "RODRIGUEZ PEREZ, OMAR ANDRES",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 1,
+    "blk": 1,
+    "pts": 0
+  },
+  "5318": {
+    "nombre": "LAREZ MENDOZA, GABRIEL ANTONIO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "5329": {
+    "nombre": "MUJICA MENDEZ, ANDRIEL EDUARDO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "5678": {
+    "nombre": "FERNANDEZ RIOS, ISMAEL ANTONIO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "9297": {
+    "nombre": "GÓMEZ PEREZ, LEOMAR GABRIEL ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "22640": {
+    "nombre": "RAMIREZ LINARES, KARLOS LUYS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "22945": {
+    "nombre": "RAMIREZ CASTRO, JESUS DANIEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 4,
+    "blk": 0,
+    "pts": 0
+  },
+  "23020": {
+    "nombre": "ZAMBRANO SALCEDO, EZEQUIEL DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 11,
+    "rob": 4,
+    "blk": 1,
+    "pts": 0
+  },
+  "23436": {
+    "nombre": "PADRÓN VARGAS , WALTER BRYAN ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "23449": {
+    "nombre": "PINTO GONZÁLEZ , VICTOR DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "23501": {
+    "nombre": "REBOLLEDO DIAZ, VICTOR MANUEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "23524": {
+    "nombre": "NAVAS LEÓN , ANTHONY ALEJANDRO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 8,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "23529": {
+    "nombre": "MAYORA GONZÁLEZ , ELIMBERT ELIAN",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "23879": {
+    "nombre": "FAJARDO INFANTE, MOISES DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "23900": {
+    "nombre": "GARCÍA CARRIZALES, REYGVIL DIOSBAR ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 1,
+    "blk": 1,
+    "pts": 0
+  },
+  "24031": {
+    "nombre": "SANDOVAL VILLANUEVA, JHOZMAR JOSUE",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 2,
+    "blk": 0,
+    "pts": 0
+  },
+  "24125": {
+    "nombre": "CAMPOS VASQUEZ, ENMANUEL  JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "24457": {
+    "nombre": "GONZÁLEZ GARCÍA , JOSÉ DE JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "25010": {
+    "nombre": "MORALES  NAVAS, AARON   JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "25216": {
+    "nombre": "MATUTE  ESQUEDA, JUAN  DIEGO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 4,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "25280": {
+    "nombre": "LEAL  LICETT, ANGEL   FRANCISCO DE  JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 6,
+    "blk": 2,
+    "pts": 0
+  },
+  "26084": {
+    "nombre": "TORRES   MENDOZA  , JOEL  ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 1,
+    "pts": 0
+  },
+  "28541": {
+    "nombre": "ABREU NIEVES, JHOSTIN GABRIEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 4,
+    "blk": 1,
+    "pts": 0
+  },
+  "29978": {
+    "nombre": "LORVES CORDERO, JOEL ELIAS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 5,
+    "blk": 2,
+    "pts": 0
+  },
+  "29979": {
+    "nombre": "CASTILLO PEREZ, JONELVIN EDUARNER",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "30029": {
+    "nombre": "GONZÁLEZ ROMERO, JOSÉ LUIS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 3,
+    "blk": 2,
+    "pts": 0
+  },
+  "30063": {
+    "nombre": "RIVERO ROJANO, ORLANDO DE JESUS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "30829": {
+    "nombre": "FARIAS SUÁREZ , FERNANDO JOSÉ ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "30833": {
+    "nombre": "FARIAS SUÁREZ , SEBASTIÁN ALEJANDRO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 4,
+    "rob": 1,
+    "blk": 1,
+    "pts": 0
+  },
+  "33916": {
+    "nombre": "DÍAZ ACOSTA , ANGEL NEOMAR",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "34243": {
+    "nombre": "VASQUEZ AYALA , CHRISTOPHER MATHIAS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "34246": {
+    "nombre": "REYES NIEVES, BRUNO ALBERTO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "34294": {
+    "nombre": "IBERO LEON, KEVIN RANDEL",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "35113": {
+    "nombre": "BOLIVAR   BLANCO, HAYVERSON   EDUARDO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 5,
+    "rob": 4,
+    "blk": 5,
+    "pts": 0
+  },
+  "35877": {
+    "nombre": "GUERRERO  PÉREZ , CESAR SANTIAGO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "36109": {
+    "nombre": "KONG WU, JIN YUAN ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "36446": {
+    "nombre": "MARTINEZ BELISARIO, JULIO MOISES",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "37324": {
+    "nombre": "FARIAS DOMÍNGUEZ , SEBASTIÁN ALEJANDRO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 6,
+    "rob": 7,
+    "blk": 1,
+    "pts": 0
+  },
+  "39924": {
+    "nombre": "MAGALLANES GIL , MAIKOL YOSNIEL ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "40924": {
+    "nombre": "CHÁVEZ PÉREZ , CRISTOPHER ABRAHAM ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "43800": {
+    "nombre": "MARIN GARCIA, JHONANGEL ALEXANDER",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "43842": {
+    "nombre": "BASTIDAS MEJÍAS, LEONARDO JESÚS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 3,
+    "blk": 1,
+    "pts": 0
+  },
+  "43843": {
+    "nombre": "MOTA ROJAS, ANTHONY ISAAC",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 3,
+    "blk": 0,
+    "pts": 0
+  },
+  "43890": {
+    "nombre": "ROJAS MADERO, YEANJERVIS DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 1,
+    "pts": 0
+  },
+  "43910": {
+    "nombre": "MERCADO LEAL, JUNNIEL ENRIQUE",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "44183": {
+    "nombre": "CHUELLO CASADIEGO, JESUS GABRIEL ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "44453": {
+    "nombre": "CASTRO GUILLEN, YONJAVIER JESUS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 9,
+    "rob": 2,
+    "blk": 1,
+    "pts": 0
+  },
+  "44597": {
+    "nombre": "ESPINOZA GONZALEZ, MIGUEL EDUARDO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "45373": {
+    "nombre": "CALDERÓN LAYA, DAVID ALEXANDER ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "48534": {
+    "nombre": "CABRERA TORRES , GABRIEL ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 0,
+    "blk": 1,
+    "pts": 0
+  },
+  "48535": {
+    "nombre": "MARTÍNEZ CORONAS , EMMANUEL JESÚS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 8,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "48759": {
+    "nombre": "OLIVERA HENRIQUEZ, JORGE ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "48761": {
+    "nombre": "OLIVERA HENRIQUEZ , YASSIM ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "48763": {
+    "nombre": "GALLARDO GONZÁLEZ , HENNIN JOSÉ ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "48768": {
+    "nombre": "LANDER FALCON, YORNEY JEREMIAS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 2,
+    "blk": 0,
+    "pts": 0
+  },
+  "48872": {
+    "nombre": "CATARI VICUÑA, JUAN LUIS",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "48919": {
+    "nombre": "TOVAR GRANADILLO , JHOSSUE ALESSANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49016": {
+    "nombre": "GARCIA LARA, SANTIAGO JERICO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 3,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "49151": {
+    "nombre": "MOLINA REYES, JOSE YONAIKER",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49184": {
+    "nombre": "OROPEZA RODRIGUEZ, DYLANS ESTHANIER",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49189": {
+    "nombre": "ROJAS  RODRIGUEZ, IVERSON JOSE",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 3,
+    "blk": 0,
+    "pts": 0
+  },
+  "49203": {
+    "nombre": "CAMEJO  HIDALGO, JESHUA  ISAI",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49210": {
+    "nombre": "HERNÁNDEZ SILVA, ABRAHAM GUILLERMO ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49247": {
+    "nombre": "MORENO SÁNCHEZ, DIOSCAR JOSÉ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 2,
+    "rob": 1,
+    "blk": 0,
+    "pts": 0
+  },
+  "49258": {
+    "nombre": "MORAN LONDOÑO, HENDRYCK JESUS ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 6,
+    "rob": 2,
+    "blk": 5,
+    "pts": 0
+  },
+  "49261": {
+    "nombre": "MEDINA MARÍN , JOEL DAVID",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 1,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "49515": {
+    "nombre": "ANDRADE  SALAZAR, OSMAN ALEJANDRO",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 4,
+    "rob": 7,
+    "blk": 0,
+    "pts": 0
+  },
+  "49662": {
+    "nombre": "MEDINA BLANCO, VICTOR GABRIEL ",
+    "equipo": "N/A",
+    "partidos": 0,
+    "reb_def": 0,
+    "rob": 0,
+    "blk": 0,
+    "pts": 0
+  },
+  "_procesados": [
+    "juego2.json",
+    "juego3.json",
+    "juego4.json",
+    "partido.json"
+  ]
+}

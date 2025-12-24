@@ -1,0 +1,234 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Scouting Defensivo</title>
+        <style>
+            :root { --bg: #0f172a; --card: #1e293b; --text: #f3f4f6; --green: #10b981; --blue: #3b82f6; --red: #ef4444; --accent: #f59e0b; }
+            body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 20px; }
+            .container { max-width: 1200px; margin: 0 auto; }
+            header { text-align: center; margin-bottom: 30px; border-bottom: 1px solid #374151; padding-bottom: 20px; }
+            
+            .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+            .card { background: var(--card); border-radius: 12px; padding: 20px; border-top: 4px solid; }
+            .card-val { border-color: var(--accent); } .card-def { border-color: var(--blue); } .card-clutch { border-color: var(--red); }
+            
+            .card-title { font-weight: bold; text-transform: uppercase; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+            .player-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #334155; }
+            
+            .p-name { cursor: pointer; font-weight: bold; color:#fff; } .p-name:hover { color: var(--accent); }
+            .p-team { font-size: 0.8rem; color: #9ca3af; }
+            .def-details { font-size: 0.7rem; color: #60a5fa; margin-top:2px; } /* Detalle defensivo */
+            
+            .stat-badge { font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 1rem; }
+            .bg-accent { background: rgba(245, 158, 11, 0.2); color: var(--accent); }
+            .bg-blue { background: rgba(59, 130, 246, 0.2); color: var(--blue); }
+            .bg-red { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+
+            /* MODAL */
+            .modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index:999; }
+            .modal-box { background: var(--card); padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; position: relative; border: 2px solid var(--blue); }
+            .close-btn { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+            .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; margin-top: 20px; }
+            .stat-box { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; }
+            .val-big { font-size: 1.2rem; font-weight: bold; }
+            .lbl-small { font-size: 0.7rem; color: #9ca3af; text-transform: uppercase; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <header><h1>🛡️ Scouting: Defensa & Eficiencia</h1><small>Robos, Tapones y Rebotes Defensivos Prioritarios</small></header>
+            <div class="dashboard-grid">
+                
+                <div class="card card-val">
+                    <div class="card-title" style="color: var(--accent)">⭐ MVP (Valoración)</div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('1936')">#1 BERROTERAN RODRÍGU</div>
+                                <div class="p-team">Lobos de Ribas</div>
+                            </div>
+                            <span class="stat-badge bg-accent">37</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('44453')">#2 CASTRO GUILLEN, YO</div>
+                                <div class="p-team">Halcones del Samán</div>
+                            </div>
+                            <span class="stat-badge bg-accent">14</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('3544')">#3 CAMPERO HERNÁNDEZ,</div>
+                                <div class="p-team">Gladiadores de Turmero 'A'</div>
+                            </div>
+                            <span class="stat-badge bg-accent">11</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('1902')">#4 DIAZ PÉREZ, ALAN D</div>
+                                <div class="p-team">Lobos de Ribas</div>
+                            </div>
+                            <span class="stat-badge bg-accent">10</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('43843')">#5 MOTA ROJAS, ANTHON</div>
+                                <div class="p-team">Gladiadores de Turmero 'A'</div>
+                            </div>
+                            <span class="stat-badge bg-accent">10</span>
+                        </div>
+                    
+                </div>
+
+                <div class="card card-def">
+                    <div class="card-title" style="color: var(--blue)">🛡️ El Muro Defensivo</div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('1936')">#1 BERROTERAN RODRÍGU</div>
+                                <div class="def-details">
+                                    7 Rob | 0 Tap | 0 RD
+                                </div>
+                            </div>
+                            <span class="stat-badge bg-blue">7</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('22945')">#2 RAMIREZ CASTRO, JE</div>
+                                <div class="def-details">
+                                    4 Rob | 0 Tap | 0 RD
+                                </div>
+                            </div>
+                            <span class="stat-badge bg-blue">4</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('43842')">#3 BASTIDAS MEJÍAS, L</div>
+                                <div class="def-details">
+                                    3 Rob | 1 Tap | 0 RD
+                                </div>
+                            </div>
+                            <span class="stat-badge bg-blue">4</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('3776')">#4 FAJARDO HERNÁNDEZ,</div>
+                                <div class="def-details">
+                                    3 Rob | 0 Tap | 0 RD
+                                </div>
+                            </div>
+                            <span class="stat-badge bg-blue">3</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('43843')">#5 MOTA ROJAS, ANTHON</div>
+                                <div class="def-details">
+                                    3 Rob | 0 Tap | 0 RD
+                                </div>
+                            </div>
+                            <span class="stat-badge bg-blue">3</span>
+                        </div>
+                    
+                </div>
+
+                <div class="card card-clutch">
+                    <div class="card-title" style="color: var(--red)">🔥 Sangre Fría</div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('3544')">#1 CAMPERO HERNÁNDEZ,</div>
+                                <div class="p-team">Gladiadores de Turmero 'A'</div>
+                            </div>
+                            <span class="stat-badge bg-red">8</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('1936')">#2 BERROTERAN RODRÍGU</div>
+                                <div class="p-team">Lobos de Ribas</div>
+                            </div>
+                            <span class="stat-badge bg-red">6</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('5316')">#3 RODRIGUEZ PEREZ, O</div>
+                                <div class="p-team">Mamba</div>
+                            </div>
+                            <span class="stat-badge bg-red">6</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('23524')">#4 NAVAS LEÓN , ANTHO</div>
+                                <div class="p-team">Halcones del Samán</div>
+                            </div>
+                            <span class="stat-badge bg-red">5</span>
+                        </div>
+                    
+                        <div class="player-row">
+                            <div>
+                                <div class="p-name" onclick="abrir('3779')">#5 PALMA VALERIO, FRA</div>
+                                <div class="p-team">Lobos de Ribas</div>
+                            </div>
+                            <span class="stat-badge bg-red">4</span>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="modal" class="modal-overlay" onclick="cerrar(event)">
+            <div class="modal-box">
+                <span class="close-btn" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+
+        <script>
+            const roster = [{"id":"1595","nombre":"ANGULO SILVA, ALAN ANDRUS","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"ANGULO SILVA, ALAN ANDRUS","id":1595,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":15,"reb":8,"ast":2,"rob":2,"blk":0,"flt":1,"perdidas":4,"fallos_campo":14,"fallos_libre":1,"clutch_pts":3},"avanzadas":{"val":7,"defensa":2,"clutch":3}},{"id":"1613","nombre":"MORALES LÓPEZ, SIMON ALEJANDRO","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"MORALES LÓPEZ, SIMON ALEJANDRO","id":1613,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":7,"reb":5,"ast":0,"rob":1,"blk":0,"flt":4,"perdidas":0,"fallos_campo":1,"fallos_libre":3,"clutch_pts":0},"avanzadas":{"val":5,"defensa":1,"clutch":0}},{"id":"1618","nombre":"BARRETO GARCIA, LUIS ALEJANDRO","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"BARRETO GARCIA, LUIS ALEJANDRO","id":1618,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":2,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":2,"defensa":0,"clutch":0}},{"id":"1902","nombre":"DIAZ PÉREZ, ALAN DAVID","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"DIAZ PÉREZ, ALAN DAVID","id":1902,"equipo":"Lobos de Ribas","partidos":1,"pts":14,"reb":5,"ast":0,"rob":2,"blk":0,"flt":4,"perdidas":1,"fallos_campo":4,"fallos_libre":2,"clutch_pts":0},"avanzadas":{"val":10,"defensa":2,"clutch":0}},{"id":"1936","nombre":"BERROTERAN RODRÍGUEZ, DIEGO ALEJANDRO","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"BERROTERAN RODRÍGUEZ, DIEGO ALEJANDRO","id":1936,"equipo":"Lobos de Ribas","partidos":1,"pts":23,"reb":10,"ast":8,"rob":7,"blk":0,"flt":1,"perdidas":3,"fallos_campo":5,"fallos_libre":2,"clutch_pts":6},"avanzadas":{"val":37,"defensa":7,"clutch":6}},{"id":"3505","nombre":"LORCA VILLEGAS, JOSÉ FRANCISCO","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"LORCA VILLEGAS, JOSÉ FRANCISCO","id":3505,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":2,"reb":1,"ast":0,"rob":1,"blk":0,"flt":1,"perdidas":1,"fallos_campo":2,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":1,"clutch":0}},{"id":"3544","nombre":"CAMPERO HERNÁNDEZ, FABIAN EDUARDO ","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"CAMPERO HERNÁNDEZ, FABIAN EDUARDO ","id":3544,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":14,"reb":4,"ast":2,"rob":2,"blk":0,"flt":3,"perdidas":1,"fallos_campo":3,"fallos_libre":4,"clutch_pts":8},"avanzadas":{"val":11,"defensa":2,"clutch":8}},{"id":"3750","nombre":"CONTRERAS ARAQUE, EDUARDO MATÍAS DANIEL","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"CONTRERAS ARAQUE, EDUARDO MATÍAS DANIEL","id":3750,"equipo":"Lobos de Ribas","partidos":1,"pts":3,"reb":5,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":2,"fallos_campo":3,"fallos_libre":1,"clutch_pts":0},"avanzadas":{"val":2,"defensa":0,"clutch":0}},{"id":"3776","nombre":"FAJARDO HERNÁNDEZ, SANTIAGO DAVID","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"FAJARDO HERNÁNDEZ, SANTIAGO DAVID","id":3776,"equipo":"Lobos de Ribas","partidos":1,"pts":3,"reb":6,"ast":0,"rob":3,"blk":0,"flt":0,"perdidas":4,"fallos_campo":5,"fallos_libre":2,"clutch_pts":0},"avanzadas":{"val":1,"defensa":3,"clutch":0}},{"id":"3779","nombre":"PALMA VALERIO, FRANCISCO JAVIER ","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"PALMA VALERIO, FRANCISCO JAVIER ","id":3779,"equipo":"Lobos de Ribas","partidos":1,"pts":8,"reb":2,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":1,"fallos_campo":2,"fallos_libre":2,"clutch_pts":4},"avanzadas":{"val":5,"defensa":0,"clutch":4}},{"id":"5308","nombre":"PEDRON BETANCOURT, LUIS ANTONIO","equipo":"Mamba","partidos":1,"stats":{"nombre":"PEDRON BETANCOURT, LUIS ANTONIO","id":5308,"equipo":"Mamba","partidos":1,"pts":3,"reb":2,"ast":0,"rob":2,"blk":0,"flt":0,"perdidas":3,"fallos_campo":2,"fallos_libre":1,"clutch_pts":3},"avanzadas":{"val":1,"defensa":2,"clutch":3}},{"id":"5316","nombre":"RODRIGUEZ PEREZ, OMAR ANDRES","equipo":"Mamba","partidos":1,"stats":{"nombre":"RODRIGUEZ PEREZ, OMAR ANDRES","id":5316,"equipo":"Mamba","partidos":1,"pts":6,"reb":5,"ast":1,"rob":1,"blk":1,"flt":2,"perdidas":4,"fallos_campo":5,"fallos_libre":6,"clutch_pts":6},"avanzadas":{"val":-3,"defensa":2,"clutch":6}},{"id":"5318","nombre":"LAREZ MENDOZA, GABRIEL ANTONIO ","equipo":"Mamba","partidos":1,"stats":{"nombre":"LAREZ MENDOZA, GABRIEL ANTONIO ","id":5318,"equipo":"Mamba","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":0,"clutch":0}},{"id":"5329","nombre":"MUJICA MENDEZ, ANDRIEL EDUARDO ","equipo":"Mamba","partidos":1,"stats":{"nombre":"MUJICA MENDEZ, ANDRIEL EDUARDO ","id":5329,"equipo":"Mamba","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"5678","nombre":"FERNANDEZ RIOS, ISMAEL ANTONIO ","equipo":"Mamba","partidos":1,"stats":{"nombre":"FERNANDEZ RIOS, ISMAEL ANTONIO ","id":5678,"equipo":"Mamba","partidos":1,"pts":0,"reb":1,"ast":0,"rob":1,"blk":0,"flt":0,"perdidas":0,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":1,"defensa":1,"clutch":0}},{"id":"9297","nombre":"GÓMEZ PEREZ, LEOMAR GABRIEL ","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"GÓMEZ PEREZ, LEOMAR GABRIEL ","id":9297,"equipo":"Lobos de Ribas","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"22640","nombre":"RAMIREZ LINARES, KARLOS LUYS ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"RAMIREZ LINARES, KARLOS LUYS ","id":22640,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":1,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":2,"fallos_campo":2,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-3,"defensa":0,"clutch":0}},{"id":"22945","nombre":"RAMIREZ CASTRO, JESUS DANIEL","equipo":"Mamba","partidos":1,"stats":{"nombre":"RAMIREZ CASTRO, JESUS DANIEL","id":22945,"equipo":"Mamba","partidos":1,"pts":9,"reb":7,"ast":2,"rob":4,"blk":0,"flt":2,"perdidas":6,"fallos_campo":9,"fallos_libre":3,"clutch_pts":0},"avanzadas":{"val":2,"defensa":4,"clutch":0}},{"id":"23436","nombre":"PADRÓN VARGAS , WALTER BRYAN ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"PADRÓN VARGAS , WALTER BRYAN ","id":23436,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":1,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-2,"defensa":0,"clutch":0}},{"id":"23449","nombre":"PINTO GONZÁLEZ , VICTOR DAVID","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"PINTO GONZÁLEZ , VICTOR DAVID","id":23449,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"23501","nombre":"REBOLLEDO DIAZ, VICTOR MANUEL","equipo":"Mamba","partidos":1,"stats":{"nombre":"REBOLLEDO DIAZ, VICTOR MANUEL","id":23501,"equipo":"Mamba","partidos":1,"pts":1,"reb":0,"ast":1,"rob":1,"blk":0,"flt":2,"perdidas":3,"fallos_campo":1,"fallos_libre":1,"clutch_pts":1},"avanzadas":{"val":-4,"defensa":1,"clutch":1}},{"id":"23524","nombre":"NAVAS LEÓN , ANTHONY ALEJANDRO ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"NAVAS LEÓN , ANTHONY ALEJANDRO ","id":23524,"equipo":"Halcones del Samán","partidos":1,"pts":12,"reb":9,"ast":0,"rob":0,"blk":0,"flt":1,"perdidas":4,"fallos_campo":3,"fallos_libre":4,"clutch_pts":5},"avanzadas":{"val":9,"defensa":0,"clutch":5}},{"id":"23529","nombre":"MAYORA GONZÁLEZ , ELIMBERT ELIAN","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"MAYORA GONZÁLEZ , ELIMBERT ELIAN","id":23529,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"23900","nombre":"GARCÍA CARRIZALES, REYGVIL DIOSBAR ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"GARCÍA CARRIZALES, REYGVIL DIOSBAR ","id":23900,"equipo":"Halcones del Samán","partidos":1,"pts":9,"reb":2,"ast":0,"rob":1,"blk":0,"flt":5,"perdidas":5,"fallos_campo":4,"fallos_libre":5,"clutch_pts":0},"avanzadas":{"val":-7,"defensa":1,"clutch":0}},{"id":"24031","nombre":"SANDOVAL VILLANUEVA, JHOZMAR JOSUE","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"SANDOVAL VILLANUEVA, JHOZMAR JOSUE","id":24031,"equipo":"Lobos de Ribas","partidos":1,"pts":4,"reb":1,"ast":0,"rob":2,"blk":0,"flt":3,"perdidas":3,"fallos_campo":1,"fallos_libre":1,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":2,"clutch":0}},{"id":"24125","nombre":"CAMPOS VASQUEZ, ENMANUEL  JESUS","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"CAMPOS VASQUEZ, ENMANUEL  JESUS","id":24125,"equipo":"Lobos de Ribas","partidos":1,"pts":2,"reb":0,"ast":0,"rob":0,"blk":0,"flt":3,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"24457","nombre":"GONZÁLEZ GARCÍA , JOSÉ DE JESUS","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"GONZÁLEZ GARCÍA , JOSÉ DE JESUS","id":24457,"equipo":"Halcones del Samán","partidos":1,"pts":2,"reb":0,"ast":0,"rob":0,"blk":0,"flt":3,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"30063","nombre":"RIVERO ROJANO, ORLANDO DE JESUS","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"RIVERO ROJANO, ORLANDO DE JESUS","id":30063,"equipo":"Lobos de Ribas","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":3,"perdidas":1,"fallos_campo":1,"fallos_libre":1,"clutch_pts":0},"avanzadas":{"val":-6,"defensa":0,"clutch":0}},{"id":"33916","nombre":"DÍAZ ACOSTA , ANGEL NEOMAR","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"DÍAZ ACOSTA , ANGEL NEOMAR","id":33916,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":1,"ast":0,"rob":0,"blk":0,"flt":1,"perdidas":2,"fallos_campo":2,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-4,"defensa":0,"clutch":0}},{"id":"35877","nombre":"GUERRERO  PÉREZ , CESAR SANTIAGO ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"GUERRERO  PÉREZ , CESAR SANTIAGO ","id":35877,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":0,"clutch":0}},{"id":"36109","nombre":"KONG WU, JIN YUAN ","equipo":"Mamba","partidos":1,"stats":{"nombre":"KONG WU, JIN YUAN ","id":36109,"equipo":"Mamba","partidos":1,"pts":5,"reb":3,"ast":0,"rob":1,"blk":0,"flt":1,"perdidas":2,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":5,"defensa":1,"clutch":0}},{"id":"39924","nombre":"MAGALLANES GIL , MAIKOL YOSNIEL ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"MAGALLANES GIL , MAIKOL YOSNIEL ","id":39924,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":2,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-2,"defensa":0,"clutch":0}},{"id":"40924","nombre":"CHÁVEZ PÉREZ , CRISTOPHER ABRAHAM ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"CHÁVEZ PÉREZ , CRISTOPHER ABRAHAM ","id":40924,"equipo":"Halcones del Samán","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":0,"clutch":0}},{"id":"43800","nombre":"MARIN GARCIA, JHONANGEL ALEXANDER","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"MARIN GARCIA, JHONANGEL ALEXANDER","id":43800,"equipo":"Lobos de Ribas","partidos":1,"pts":0,"reb":2,"ast":0,"rob":2,"blk":0,"flt":1,"perdidas":2,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":2,"clutch":0}},{"id":"43842","nombre":"BASTIDAS MEJÍAS, LEONARDO JESÚS ","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"BASTIDAS MEJÍAS, LEONARDO JESÚS ","id":43842,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":2,"reb":4,"ast":0,"rob":3,"blk":1,"flt":0,"perdidas":0,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":9,"defensa":4,"clutch":0}},{"id":"43843","nombre":"MOTA ROJAS, ANTHONY ISAAC","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"MOTA ROJAS, ANTHONY ISAAC","id":43843,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":8,"reb":5,"ast":0,"rob":3,"blk":0,"flt":1,"perdidas":1,"fallos_campo":4,"fallos_libre":0,"clutch_pts":2},"avanzadas":{"val":10,"defensa":3,"clutch":2}},{"id":"43890","nombre":"ROJAS MADERO, YEANJERVIS DAVID","equipo":"Lobos de Ribas","partidos":1,"stats":{"nombre":"ROJAS MADERO, YEANJERVIS DAVID","id":43890,"equipo":"Lobos de Ribas","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":1,"flt":1,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":0,"defensa":1,"clutch":0}},{"id":"43910","nombre":"MERCADO LEAL, JUNNIEL ENRIQUE","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"MERCADO LEAL, JUNNIEL ENRIQUE","id":43910,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"44183","nombre":"CHUELLO CASADIEGO, JESUS GABRIEL ","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"CHUELLO CASADIEGO, JESUS GABRIEL ","id":44183,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":3,"perdidas":0,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-3,"defensa":0,"clutch":0}},{"id":"44453","nombre":"CASTRO GUILLEN, YONJAVIER JESUS ","equipo":"Halcones del Samán","partidos":1,"stats":{"nombre":"CASTRO GUILLEN, YONJAVIER JESUS ","id":44453,"equipo":"Halcones del Samán","partidos":1,"pts":11,"reb":10,"ast":1,"rob":2,"blk":1,"flt":2,"perdidas":3,"fallos_campo":5,"fallos_libre":1,"clutch_pts":2},"avanzadas":{"val":14,"defensa":3,"clutch":2}},{"id":"44597","nombre":"ESPINOZA GONZALEZ, MIGUEL EDUARDO","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"ESPINOZA GONZALEZ, MIGUEL EDUARDO","id":44597,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":0,"reb":0,"ast":0,"rob":0,"blk":0,"flt":0,"perdidas":0,"fallos_campo":1,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-1,"defensa":0,"clutch":0}},{"id":"45373","nombre":"CALDERÓN LAYA, DAVID ALEXANDER ","equipo":"Mamba","partidos":1,"stats":{"nombre":"CALDERÓN LAYA, DAVID ALEXANDER ","id":45373,"equipo":"Mamba","partidos":1,"pts":2,"reb":0,"ast":0,"rob":1,"blk":0,"flt":4,"perdidas":1,"fallos_campo":0,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-2,"defensa":1,"clutch":0}},{"id":"48919","nombre":"TOVAR GRANADILLO , JHOSSUE ALESSANDRO","equipo":"Mamba","partidos":1,"stats":{"nombre":"TOVAR GRANADILLO , JHOSSUE ALESSANDRO","id":48919,"equipo":"Mamba","partidos":1,"pts":1,"reb":0,"ast":0,"rob":0,"blk":0,"flt":4,"perdidas":3,"fallos_campo":3,"fallos_libre":1,"clutch_pts":0},"avanzadas":{"val":-10,"defensa":0,"clutch":0}},{"id":"49016","nombre":"GARCIA LARA, SANTIAGO JERICO","equipo":"Mamba","partidos":1,"stats":{"nombre":"GARCIA LARA, SANTIAGO JERICO","id":49016,"equipo":"Mamba","partidos":1,"pts":0,"reb":5,"ast":0,"rob":1,"blk":0,"flt":4,"perdidas":1,"fallos_campo":4,"fallos_libre":0,"clutch_pts":0},"avanzadas":{"val":-3,"defensa":1,"clutch":0}},{"id":"49247","nombre":"MORENO SÁNCHEZ, DIOSCAR JOSÉ","equipo":"Gladiadores de Turmero 'A'","partidos":1,"stats":{"nombre":"MORENO SÁNCHEZ, DIOSCAR JOSÉ","id":49247,"equipo":"Gladiadores de Turmero 'A'","partidos":1,"pts":3,"reb":2,"ast":0,"rob":1,"blk":0,"flt":0,"perdidas":0,"fallos_campo":3,"fallos_libre":1,"clutch_pts":0},"avanzadas":{"val":2,"defensa":1,"clutch":0}}];
+            function abrir(id) {
+                const p = roster.find(j => j.id === id);
+                if(!p) return;
+                
+                document.getElementById('modal-content').innerHTML = `
+                    <div style="text-align:center; border-bottom:1px solid #374151; padding-bottom:15px;">
+                        <h2>${p.nombre}</h2>
+                        <div style="color:#60a5fa; font-weight:bold;">🛡️ ${p.equipo}</div>
+                    </div>
+                    
+                    <div style="margin-top:15px; text-align:center; font-weight:bold; color:#9ca3af">PERFIL DEFENSIVO</div>
+                    <div class="stats-grid">
+                        <div class="stat-box" style="border:1px solid var(--blue)"><span class="val-big" style="color:var(--blue)">${p.stats.rob}</span><span class="lbl-small">Robos</span></div>
+                        <div class="stat-box" style="border:1px solid var(--blue)"><span class="val-big" style="color:var(--blue)">${p.stats.blk}</span><span class="lbl-small">Tapones</span></div>
+                        <div class="stat-box" style="border:1px solid var(--blue)"><span class="val-big" style="color:var(--blue)">${p.stats.reb_def||0}</span><span class="lbl-small">Reb. Def</span></div>
+                    </div>
+
+                    <div style="margin-top:15px; text-align:center; font-weight:bold; color:#9ca3af">OTROS DATOS</div>
+                    <div class="stats-grid">
+                        <div class="stat-box"><span class="val-big">${p.stats.pts}</span><span class="lbl-small">Puntos</span></div>
+                        <div class="stat-box"><span class="val-big">${p.stats.ast}</span><span class="lbl-small">Asistencias</span></div>
+                        <div class="stat-box" style="border:1px solid var(--red)"><span class="val-big" style="color:var(--red)">${p.stats.perdidas}</span><span class="lbl-small">Pérdidas</span></div>
+                    </div>
+                    
+                    <div style="text-align:center; margin-top:20px;">
+                        <span style="background:var(--accent); color:#000; padding:5px 10px; border-radius:4px; font-weight:bold;">VALORACIÓN FIBA: ${p.avanzadas.val}</span>
+                    </div>
+                `;
+                document.getElementById('modal').style.display = 'flex';
+            }
+            function cerrar(e) { if(e.target.id === 'modal') document.getElementById('modal').style.display = 'none'; }
+        </script>
+    </body>
+    </html>
+    
