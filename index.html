@@ -1,612 +1,508 @@
-
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>S.G.S - Asociación de Baloncesto Aragua</title>
-        
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>S.G.S - ABEA</title>
         <style>
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eceff1; margin: 0; padding: 20px; color: #333; }
+            body { font-family: 'Segoe UI', sans-serif; background: #eceff1; margin: 0; padding: 20px; color: #333; }
             .header { text-align: center; margin-bottom: 20px; padding: 20px; background: white; border-radius: 6px; border-bottom: 5px solid #b71c1c; display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
             .header img { height: 80px; }
-            .header-text h1 { color: #b71c1c; margin: 0; font-size: 24px; text-transform: uppercase; }
-            .header-text div { font-weight: bold; color: #546e7a; font-size: 14px; }
-            
-            /* TABS */
+            .header h1 { color: #b71c1c; margin: 0; font-size: 24px; text-transform: uppercase; }
             .tab { background-color: #263238; border-radius: 6px 6px 0 0; display: flex; justify-content: center; flex-wrap: wrap; }
-            .tab button { background: inherit; border: none; cursor: pointer; padding: 14px 20px; color: #cfd8dc; font-weight: bold; font-size: 14px; transition: 0.3s; }
+            .tab button { background: inherit; border: none; cursor: pointer; padding: 14px 20px; color: #cfd8dc; font-weight: bold; transition: 0.3s; }
             .tab button:hover { background: #37474f; color: white; }
             .tab button.active { background: #b71c1c; color: white; }
-            .tabcontent { display: none; padding: 20px; background: white; border-radius: 0 0 6px 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-            
-            /* CONTROLES */
+            .tabcontent { display: none; padding: 20px; background: white; border-radius: 0 0 6px 6px; }
             .control-panel { margin-bottom: 25px; text-align: center; background: #f5f5f5; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
-            .btn-preseleccion { display: block; width: 100%; padding: 15px; background: #263238; color: #ffd700; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
-            .btn-preseleccion:hover { transform: scale(1.01); }
-            .active-pre { background: #ffd700; color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-            .switch-container { display: flex; gap: 10px; justify-content: center; }
-            .btn-switch { flex: 1; padding: 12px; border: 2px solid #b0bec5; background: white; color: #546e7a; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 12px; }
-            .btn-switch:hover { background: #eceff1; }
+            .btn-preseleccion { display: block; width: 100%; padding: 15px; background: #263238; color: #ffd700; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; text-transform: uppercase; }
+            .btn-switch { padding: 12px; border: 2px solid #b0bec5; background: white; color: #546e7a; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; font-size: 12px; }
             .active-switch { background: #546e7a; color: white; border-color: #546e7a; }
-            
-            /* GRILLAS Y TARJETAS */
+            .active-pre { background: #ffd700; color: #000; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
             .grid-tradicional, .grid-avanzada { display: none; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-            .card { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; }
-            
-            /* CABECERAS EDUCATIVAS */
+            .card { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
             .card-head { padding: 15px 10px; background: #fafafa; border-bottom: 1px solid #eee; text-align: center; }
             .head-title { font-weight: bold; color: #37474f; text-transform: uppercase; font-size: 14px; display: block; }
             .head-desc { font-size: 11px; color: #78909c; display: block; margin-top: 4px; }
             .head-formula { font-family: 'Courier New', monospace; font-size: 10px; background: #eceff1; padding: 3px 8px; border-radius: 4px; color: #555; display: inline-block; margin-top: 6px; border: 1px solid #cfd8dc; }
-
-            /* TABLAS */
             table { width: 100%; border-collapse: collapse; font-size: 13px; }
             td { padding: 10px; border-bottom: 1px solid #f1f1f1; vertical-align: middle; }
+            .jugador-flex { display: flex; align-items: center; gap: 10px; }
+            .team-logo { width: 32px; height: 32px; border-radius: 50%; object-fit: contain; border: 1px solid #eee; background: #fff; }
+            .jug-nombre { font-weight: 700; color: #333; display: block; line-height: 1.2; }
+            .jug-equipo { font-size: 10px; color: #777; text-transform: uppercase; }
             .stat-val { font-weight: bold; text-align: right; font-size: 15px; color: #333; }
-            .rank-num { background: #eceff1; padding: 2px 7px; border-radius: 4px; font-size: 11px; margin-right: 8px; font-weight: bold; color: #555; }
-            .jug-nombre { color: #000; font-weight: 600; }
-            .jug-equipo { font-size: 10px; color: #888; text-transform: uppercase; }
-            
-            /* COLORES TEMÁTICOS */
-            .b-pts { border-top: 4px solid #b71c1c; } .t-pts { color: #b71c1c; }
-            .b-reb { border-top: 4px solid #f57f17; } .t-reb { color: #f57f17; }
-            .b-ast { border-top: 4px solid #1565c0; } .t-ast { color: #1565c0; }
-            .b-rob { border-top: 4px solid #2e7d32; } .t-rob { color: #2e7d32; }
+            .rank-num { background: #eceff1; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-right: 5px; font-weight: bold; color: #555; }
+            .b-pts { border-top: 4px solid #b71c1c; } .b-reb { border-top: 4px solid #f57f17; }
+            .b-ast { border-top: 4px solid #1565c0; } .b-rob { border-top: 4px solid #2e7d32; }
             .b-clutch { border-top: 4px solid #00bcd4; background: linear-gradient(to bottom, #f0fdff, #fff); } .t-clutch { color: #0097a7; }
             .b-dark { border-top: 4px solid #37474f; }
         </style>
-    
-    </head>
-    <body>
-        <div class="header">
-            <img src="https://i.postimg.cc/fyq3J3kg/download.jpg" alt="ABEA">
-            <div class="header-text">
-                <h1>Asociación de Baloncesto de Aragua</h1>
-                <div>DIRECCIÓN TÉCNICA - SISTEMA DE GESTIÓN DE SELECCIONES</div>
-            </div>
-        </div>
-
-        <div class="tab">
-            <button class="tablinks" onclick="openCategoria(event, 'U12')">U12</button><button class="tablinks" onclick="openCategoria(event, 'U13')">U13</button><button class="tablinks" onclick="openCategoria(event, 'U14')">U14</button><button class="tablinks" onclick="openCategoria(event, 'U15')">U15</button><button class="tablinks" onclick="openCategoria(event, 'U16')">U16</button><button class="tablinks" onclick="openCategoria(event, 'U17')">U17</button><button class="tablinks" onclick="openCategoria(event, 'U18')">U18</button><button class="tablinks" onclick="openCategoria(event, 'U19')">U19</button><button class="tablinks" onclick="openCategoria(event, 'U20')">U20</button>
-        </div>
-
-        
+    </head><body><div class="header"><img src="https://i.postimg.cc/fyq3J3kg/download.jpg" alt="ABEA"><div class="header-text"><h1>Asociación de Baloncesto de Aragua</h1><div>SISTEMA DE GESTIÓN DE SELECCIONES</div></div></div><div class="tab"><button class="tablinks" onclick="openCategoria(event, 'U12')">U12</button><button class="tablinks" onclick="openCategoria(event, 'U13')">U13</button><button class="tablinks" onclick="openCategoria(event, 'U14')">U14</button><button class="tablinks" onclick="openCategoria(event, 'U15')">U15</button><button class="tablinks" onclick="openCategoria(event, 'U16')">U16</button><button class="tablinks" onclick="openCategoria(event, 'U17')">U17</button><button class="tablinks" onclick="openCategoria(event, 'U18')">U18</button><button class="tablinks" onclick="openCategoria(event, 'U19')">U19</button><button class="tablinks" onclick="openCategoria(event, 'U20')">U20</button></div>
         <div id="U12" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U12" class="btn-preseleccion" onclick="switchView('U12', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U12" class="btn-switch active-switch" onclick="switchView('U12', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U12" class="btn-switch" onclick="switchView('U12', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U12" class="btn-switch active-switch" onclick="switchView('U12', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U12" class="btn-switch" onclick="switchView('U12', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U12_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U12_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U12_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U13" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U13" class="btn-preseleccion" onclick="switchView('U13', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U13" class="btn-switch active-switch" onclick="switchView('U13', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U13" class="btn-switch" onclick="switchView('U13', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U13" class="btn-switch active-switch" onclick="switchView('U13', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U13" class="btn-switch" onclick="switchView('U13', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U13_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U13_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U13_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U14" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U14" class="btn-preseleccion" onclick="switchView('U14', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U14" class="btn-switch active-switch" onclick="switchView('U14', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U14" class="btn-switch" onclick="switchView('U14', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U14" class="btn-switch active-switch" onclick="switchView('U14', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U14" class="btn-switch" onclick="switchView('U14', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U14_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U14_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U14_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U15" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U15" class="btn-preseleccion" onclick="switchView('U15', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U15" class="btn-switch active-switch" onclick="switchView('U15', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U15" class="btn-switch" onclick="switchView('U15', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U15" class="btn-switch active-switch" onclick="switchView('U15', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U15" class="btn-switch" onclick="switchView('U15', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U15_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">304 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">SALAS CORREA</span><br><span class="jug-equipo">ESPARTANOS</span></td><td class="stat-val">278 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">BRACHO SÁNCHEZ </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">250 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">CARDENAS GARCIA</span><br><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></td><td class="stat-val">233 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">ANGULO SILVA</span><br><span class="jug-equipo">GLADIADORES DE TURMERO 'A'</span></td><td class="stat-val">205 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">SALAS CORREA</span><br><span class="jug-equipo">ESPARTANOS</span></td><td class="stat-val">139 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">LADERA ACHE </span><br><span class="jug-equipo">TITANES DE SAN ANTONIO</span></td><td class="stat-val">101 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">LEDEZMA RIOS</span><br><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">QUINTERO PEREZ</span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">80 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">43 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">PARACARE ROMERO </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">34 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">CORONADO CHIQUITO</span><br><span class="jug-equipo">FUNDACIÓN MENDOZA</span></td><td class="stat-val">34 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">BRACHO SÁNCHEZ </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">33 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">SÁNCHEZ PALMA </span><br><span class="jug-equipo">FELINOS DE PALO NEGRO</span></td><td class="stat-val">31 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">81 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">ANDRADE  SALAZAR</span><br><span class="jug-equipo">GUARUTO</span></td><td class="stat-val">60 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">BRACHO SÁNCHEZ </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">55 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">PARACARE ROMERO </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">52 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">CARDENAS GARCIA</span><br><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></td><td class="stat-val">47 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">261 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA</span><span class="jug-equipo">ESPARTANOS</span></div></div></td><td class="stat-val">226 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">211 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CARDENAS GARCIA</span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td><td class="stat-val">203 <small style="font-size:9px; color:#999">PTS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=GLADIADORES%20DE%20TURMERO%20'A'&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANGULO SILVA</span><span class="jug-equipo">GLADIADORES DE TURMERO 'A'</span></div></div></td><td class="stat-val">177 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA</span><span class="jug-equipo">ESPARTANOS</span></div></div></td><td class="stat-val">139 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=ESTRELLAS%20DEL%20CONSEJO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LEDEZMA RIOS</span><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></div></div></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=TITANES%20DE%20SAN%20ANTONIO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LADERA ACHE </span><span class="jug-equipo">TITANES DE SAN ANTONIO</span></div></div></td><td class="stat-val">86 <small style="font-size:9px; color:#999">REB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">QUINTERO PEREZ</span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">80 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">43 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">PARACARE ROMERO </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">34 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=FUNDACI%C3%93N%20MENDOZA&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CORONADO CHIQUITO</span><span class="jug-equipo">FUNDACIÓN MENDOZA</span></div></div></td><td class="stat-val">34 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">33 <small style="font-size:9px; color:#999">AST</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=FELINOS%20DE%20PALO%20NEGRO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SÁNCHEZ PALMA </span><span class="jug-equipo">FELINOS DE PALO NEGRO</span></div></div></td><td class="stat-val">31 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">81 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANDRADE  SALAZAR</span><span class="jug-equipo">GUARUTO</span></div></div></td><td class="stat-val">60 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">55 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">PARACARE ROMERO </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">52 <small style="font-size:9px; color:#999">ROB</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CARDENAS GARCIA</span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td><td class="stat-val">47 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U15_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">SALAS CORREA</span><br><span class="jug-equipo">ESPARTANOS</span></td><td class="stat-val">72.5 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">53.0 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">CARDENAS GARCIA</span><br><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></td><td class="stat-val">50.0 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">BRACHO SÁNCHEZ </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">34.5 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">QUINTERO PEREZ</span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">31.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">SALAS CORREA</span><br><span class="jug-equipo">ESPARTANOS</span></td><td class="stat-val">156 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">150 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">LEDEZMA RIOS</span><br><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></td><td class="stat-val">111 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">BRACHO SÁNCHEZ </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">108 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">CASTRO GUILLEN</span><br><span class="jug-equipo">HALCONES DEL SAMÁN</span></td><td class="stat-val">92 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">PACHECO PIÑERO</span><br><span class="jug-equipo">GLADIADORES DE TURMERO 'B'</span></td><td class="stat-val">1.33 <small style="font-size:9px; color:#999">PPS</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">GONZÁLES PIÑANGO </span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">1.25 <small style="font-size:9px; color:#999">PPS</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">FIGUEROA LIENDO </span><br><span class="jug-equipo">LOBOS DE TURMERO</span></td><td class="stat-val">1.25 <small style="font-size:9px; color:#999">PPS</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">TERÁN PÉREZ </span><br><span class="jug-equipo">SAN JOSÉ</span></td><td class="stat-val">1.23 <small style="font-size:9px; color:#999">PPS</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">BASTIDAS MEJÍAS</span><br><span class="jug-equipo">GLADIADORES DE TURMERO 'A'</span></td><td class="stat-val">1.20 <small style="font-size:9px; color:#999">PPS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">SALAS CORREA</span><br><span class="jug-equipo">ESPARTANOS</span></td><td class="stat-val">139 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr><tr><td><span class="rank-num">#2</span> <span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><br><span class="jug-equipo">LOBOS DE RIBAS</span></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr><tr><td><span class="rank-num">#3</span> <span class="jug-nombre">LEDEZMA RIOS</span><br><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></td><td class="stat-val">100 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr><tr><td><span class="rank-num">#4</span> <span class="jug-nombre">LADERA ACHE </span><br><span class="jug-equipo">TITANES DE SAN ANTONIO</span></td><td class="stat-val">101 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr><tr><td><span class="rank-num">#5</span> <span class="jug-nombre">QUINTERO PEREZ</span><br><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></td><td class="stat-val">80 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA</span><span class="jug-equipo">ESPARTANOS</span></div></div></td><td class="stat-val">78.5 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">69.0 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CARDENAS GARCIA</span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td><td class="stat-val">66.0 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">62.5 <small style="font-size:9px; color:#999">IDX</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=GLADIADORES%20DE%20TURMERO%20'A'&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANGULO SILVA</span><span class="jug-equipo">GLADIADORES DE TURMERO 'A'</span></div></div></td><td class="stat-val">53.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=FELINOS%20DE%20PALO%20NEGRO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SEIJAS </span><span class="jug-equipo">FELINOS DE PALO NEGRO</span></div></div></td><td class="stat-val">1.60 <small style="font-size:9px; color:#999">GOP</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CARDENAS GARCIA</span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td><td class="stat-val">1.39 <small style="font-size:9px; color:#999">GOP</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA</span><span class="jug-equipo">ESPARTANOS</span></div></div></td><td class="stat-val">1.37 <small style="font-size:9px; color:#999">GOP</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">1.31 <small style="font-size:9px; color:#999">GOP</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=FELINOS%20DE%20PALO%20NEGRO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LAMMOGLIA MACHADO </span><span class="jug-equipo">FELINOS DE PALO NEGRO</span></div></div></td><td class="stat-val">1.31 <small style="font-size:9px; color:#999">GOP</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA</span><span class="jug-equipo">ESPARTANOS</span></div></div></td><td class="stat-val">212 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td><td class="stat-val">192 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=ESTRELLAS%20DEL%20CONSEJO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LEDEZMA RIOS</span><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></div></div></td><td class="stat-val">143 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td><td class="stat-val">137 <small style="font-size:9px; color:#999">STOPS</small></td></tr><tr><td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANDRADE  SALAZAR</span><span class="jug-equipo">GUARUTO</span></div></div></td><td class="stat-val">120 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U15_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">BERROTERAN RODRÍGUEZ, DIEGO ALEJANDRO</b><br><small style="color:#666">LOBOS DE RIBAS</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">245.6</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 53.0 | 🛡️Stops: 150</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">BERROTERAN RODRÍGUEZ, DIEGO ALEJANDRO</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">480.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:261 | GOP:1.31</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">2</td>
-                            <td><b style="color:#000">SALAS CORREA, JOSÉ DAVID</b><br><small style="color:#666">ESPARTANOS</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">245.6</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 72.5 | 🛡️Stops: 156</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#2</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">SALAS CORREA, JOSÉ DAVID</span><span class="jug-equipo">ESPARTANOS</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">459.8</td>
+                            <td style="text-align:right; font-size:11px;">PTS:226 | GOP:1.37</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">3</td>
-                            <td><b style="color:#000">BRACHO SÁNCHEZ , CARLOS MIGUEL</b><br><small style="color:#666">JULIAN LANDAETA ROBLES A</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">180.5</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 34.5 | 🛡️Stops: 108</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#3</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BRACHO SÁNCHEZ , CARLOS MIGUEL</span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">357.3</td>
+                            <td style="text-align:right; font-size:11px;">PTS:211 | GOP:1.17</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">4</td>
-                            <td><b style="color:#000">LEDEZMA RIOS, ENMANUEL JEREMIA</b><br><small style="color:#666">ESTRELLAS DEL CONSEJO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">161.8</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 7.0 | 🛡️Stops: 111</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#4</span><img src="https://ui-avatars.com/api/?name=ESTRELLAS%20DEL%20CONSEJO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LEDEZMA RIOS, ENMANUEL JEREMIA</span><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">308.4</td>
+                            <td style="text-align:right; font-size:11px;">PTS:128 | GOP:0.89</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">5</td>
-                            <td><b style="color:#000">CARDENAS GARCIA, ALEXIS ANDRES </b><br><small style="color:#666">DRAGONES DE SAN FRANCISCO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">149.1</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 50.0 | 🛡️Stops: 81</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#5</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CARDENAS GARCIA, ALEXIS ANDRES </span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">306.9</td>
+                            <td style="text-align:right; font-size:11px;">PTS:203 | GOP:1.39</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">6</td>
-                            <td><b style="color:#000">ANDRADE  SALAZAR, OSMAN ALEJANDRO</b><br><small style="color:#666">GUARUTO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">143.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: -2.0 | 🛡️Stops: 88</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#6</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANDRADE  SALAZAR, OSMAN ALEJANDRO</span><span class="jug-equipo">GUARUTO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">306.2</td>
+                            <td style="text-align:right; font-size:11px;">PTS:161 | GOP:1.04</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">7</td>
-                            <td><b style="color:#000">MEDINA PACHECO, ANTONY DANIEL</b><br><small style="color:#666">DRAGONES DE SAN FRANCISCO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">135.9</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 20.0 | 🛡️Stops: 87</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#7</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">PARACARE ROMERO , JEYBELSON MIGUEL</span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">275.4</td>
+                            <td style="text-align:right; font-size:11px;">PTS:108 | GOP:1.06</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">8</td>
-                            <td><b style="color:#000">CASTRO GUILLEN, YONJAVIER JESUS </b><br><small style="color:#666">HALCONES DEL SAMÁN</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">133.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 26.5 | 🛡️Stops: 92</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#8</span><img src="https://ui-avatars.com/api/?name=GLADIADORES%20DE%20TURMERO%20'A'&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ANGULO SILVA, ALAN ANDRUS</span><span class="jug-equipo">GLADIADORES DE TURMERO 'A'</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">268.1</td>
+                            <td style="text-align:right; font-size:11px;">PTS:177 | GOP:1.14</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">9</td>
-                            <td><b style="color:#000">ANGULO SILVA, ALAN ANDRUS</b><br><small style="color:#666">GLADIADORES DE TURMERO 'A'</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">133</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 30.0 | 🛡️Stops: 79</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#9</span><img src="https://ui-avatars.com/api/?name=DRAGONES%20DE%20SAN%20FRANCISCO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">MEDINA PACHECO, ANTONY DANIEL</span><span class="jug-equipo">DRAGONES DE SAN FRANCISCO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">261.8</td>
+                            <td style="text-align:right; font-size:11px;">PTS:144 | GOP:1.21</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">10</td>
-                            <td><b style="color:#000">PARACARE ROMERO , JEYBELSON MIGUEL</b><br><small style="color:#666">JULIAN LANDAETA ROBLES A</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">132.9</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 24.5 | 🛡️Stops: 84</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#10</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">PALACIOS MÁRQUEZ, JOSUE DAVID</span><span class="jug-equipo">LOBOS DE TURMERO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">255.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:145 | GOP:1.01</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">11</td>
-                            <td><b style="color:#000">QUINTERO PEREZ, ARRAEL ALEJANDO</b><br><small style="color:#666">JULIAN LANDAETA ROBLES A</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">125.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 31.0 | 🛡️Stops: 83</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#11</span><img src="https://ui-avatars.com/api/?name=TITANES%20DE%20SAN%20ANTONIO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LADERA ACHE , YENDER LEUNAM</span><span class="jug-equipo">TITANES DE SAN ANTONIO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">247.4</td>
+                            <td style="text-align:right; font-size:11px;">PTS:104 | GOP:1.04</td>
                         </tr>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">12</td>
-                            <td><b style="color:#000">LADERA ACHE , YENDER LEUNAM</b><br><small style="color:#666">TITANES DE SAN ANTONIO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">122.6</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 11.0 | 🛡️Stops: 72</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#12</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LEAL  LICETT, ANGEL   FRANCISCO DE  JESUS</span><span class="jug-equipo">GUARUTO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">246.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:117 | GOP:0.97</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">13</td>
-                            <td><b style="color:#000">DÍAZ GÓMEZ , EDWAR SMITH</b><br><small style="color:#666">SAN JOSÉ</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">120.6</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 16.0 | 🛡️Stops: 83</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#13</span><img src="https://ui-avatars.com/api/?name=HALCONES%20DEL%20SAM%C3%81N&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CASTRO GUILLEN, YONJAVIER JESUS </span><span class="jug-equipo">HALCONES DEL SAMÁN</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">240.6</td>
+                            <td style="text-align:right; font-size:11px;">PTS:105 | GOP:1.10</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">14</td>
-                            <td><b style="color:#000">LEAL  LICETT, ANGEL   FRANCISCO DE  JESUS</b><br><small style="color:#666">GUARUTO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">120.2</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 4.0 | 🛡️Stops: 75</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#14</span><img src="https://ui-avatars.com/api/?name=ESTRELLAS%20DEL%20CONSEJO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">MATAMOROS VELASQUEZ, ANDRYS DANIEL</span><span class="jug-equipo">ESTRELLAS DEL CONSEJO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">240</td>
+                            <td style="text-align:right; font-size:11px;">PTS:116 | GOP:0.93</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">15</td>
-                            <td><b style="color:#000">PALACIOS MÁRQUEZ, JOSUE DAVID</b><br><small style="color:#666">LOBOS DE TURMERO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">116.7</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: -4.5 | 🛡️Stops: 68</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#15</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">QUINTERO PEREZ, ARRAEL ALEJANDO</span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">236.6</td>
+                            <td style="text-align:right; font-size:11px;">PTS:95 | GOP:1.18</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">16</td>
-                            <td><b style="color:#000">BENITEZ OCHOA, NIGER EZEQUIEL</b><br><small style="color:#666">LA BARRACA</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">113.2</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 20.5 | 🛡️Stops: 70</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#16</span><img src="https://ui-avatars.com/api/?name=LA%20BARRACA&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BENITEZ OCHOA, NIGER EZEQUIEL</span><span class="jug-equipo">LA BARRACA</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">225.6</td>
+                            <td style="text-align:right; font-size:11px;">PTS:115 | GOP:1.01</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">17</td>
-                            <td><b style="color:#000">MATAMOROS VELASQUEZ, ANDRYS DANIEL</b><br><small style="color:#666">ESTRELLAS DEL CONSEJO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">106.7</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 7.0 | 🛡️Stops: 60</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#17</span><img src="https://ui-avatars.com/api/?name=SAN%20JOS%C3%89&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">DÍAZ GÓMEZ , EDWAR SMITH</span><span class="jug-equipo">SAN JOSÉ</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">218.2</td>
+                            <td style="text-align:right; font-size:11px;">PTS:93 | GOP:1.13</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">18</td>
-                            <td><b style="color:#000">BOLIVAR GARCÍA , CALEB NEHEMÍAS </b><br><small style="color:#666">CICLONES</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">98.9</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 65</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#18</span><img src="https://ui-avatars.com/api/?name=TEAM%2010&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CONTRERAS MALPA, JULIO RICARDO </span><span class="jug-equipo">TEAM 10</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">210.8</td>
+                            <td style="text-align:right; font-size:11px;">PTS:85 | GOP:0.94</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">19</td>
-                            <td><b style="color:#000">MORALES FREITES, JOSUE VALENTIN </b><br><small style="color:#666">JULIAN LANDAETA ROBLES A</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">98.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 11.0 | 🛡️Stops: 64</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#19</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">VARGAS MACHADO, XAVIER ALEJANDRO</span><span class="jug-equipo">LOBOS DE RIBAS</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">205</td>
+                            <td style="text-align:right; font-size:11px;">PTS:80 | GOP:1.05</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">20</td>
-                            <td><b style="color:#000">VARGAS MACHADO, XAVIER ALEJANDRO</b><br><small style="color:#666">LOBOS DE RIBAS</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">97.2</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 14.5 | 🛡️Stops: 61</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#20</span><img src="https://ui-avatars.com/api/?name=CICLONES&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BOLIVAR GARCÍA , CALEB NEHEMÍAS </span><span class="jug-equipo">CICLONES</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">203.4</td>
+                            <td style="text-align:right; font-size:11px;">PTS:95 | GOP:0.90</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">21</td>
-                            <td><b style="color:#000">BOLIVAR   BLANCO, HAYVERSON   EDUARDO</b><br><small style="color:#666">GUARUTO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">97</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 2.0 | 🛡️Stops: 62</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#21</span><img src="https://ui-avatars.com/api/?name=JULIAN%20LANDAETA%20ROBLES%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">MORALES FREITES, JOSUE VALENTIN </span><span class="jug-equipo">JULIAN LANDAETA ROBLES A</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">201.9</td>
+                            <td style="text-align:right; font-size:11px;">PTS:77 | GOP:1.06</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">22</td>
-                            <td><b style="color:#000">CONTRERAS MALPA, JULIO RICARDO </b><br><small style="color:#666">TEAM 10</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">94.7</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 11.0 | 🛡️Stops: 56</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#22</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">BOLIVAR   BLANCO, HAYVERSON   EDUARDO</span><span class="jug-equipo">GUARUTO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">199.9</td>
+                            <td style="text-align:right; font-size:11px;">PTS:73 | GOP:0.94</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">23</td>
-                            <td><b style="color:#000">FARIAS DOMÍNGUEZ , SEBASTIÁN ALEJANDRO </b><br><small style="color:#666">ZANCUDITO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">94.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: -33.5 | 🛡️Stops: 63</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#23</span><img src="https://ui-avatars.com/api/?name=FELINOS%20DE%20PALO%20NEGRO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">LAMMOGLIA MACHADO , KENDELL DAVID</span><span class="jug-equipo">FELINOS DE PALO NEGRO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">198.9</td>
+                            <td style="text-align:right; font-size:11px;">PTS:89 | GOP:1.31</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">24</td>
-                            <td><b style="color:#000">GARCÍA BRAVO, REINALDO MANUEL</b><br><small style="color:#666">ESPARTANOS</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">94.2</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: -11.0 | 🛡️Stops: 64</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#24</span><img src="https://ui-avatars.com/api/?name=ZANCUDITO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">FARIAS DOMÍNGUEZ , SEBASTIÁN ALEJANDRO </span><span class="jug-equipo">ZANCUDITO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">194.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:102 | GOP:0.87</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">25</td>
-                            <td><b style="color:#000">LAMMOGLIA MACHADO , KENDELL DAVID</b><br><small style="color:#666">FELINOS DE PALO NEGRO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">93.6</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 22.0 | 🛡️Stops: 56</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#25</span><img src="https://ui-avatars.com/api/?name=ESPARTANOS&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">GARCÍA BRAVO, REINALDO MANUEL</span><span class="jug-equipo">ESPARTANOS</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">189</td>
+                            <td style="text-align:right; font-size:11px;">PTS:85 | GOP:1.00</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">26</td>
-                            <td><b style="color:#000">BARRETO BOTELLO, LEONARDO JOSE</b><br><small style="color:#666">TITANES DE SAN ANTONIO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">91.8</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 4.5 | 🛡️Stops: 74</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#26</span><img src="https://cdn-icons-png.flaticon.com/512/451/451761.png" class="team-logo"><div><span class="jug-nombre">GAZZOTTI UTRERA, SNEIJDER ADRIAN</span><span class="jug-equipo">LOBOS DE TURMERO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">188.5</td>
+                            <td style="text-align:right; font-size:11px;">PTS:113 | GOP:0.87</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">27</td>
-                            <td><b style="color:#000">ASTUDILLO RIVAS, YORMAN RAFAEL </b><br><small style="color:#666">FELINOS DE PALO NEGRO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">91.7</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 16.5 | 🛡️Stops: 60</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#27</span><img src="https://ui-avatars.com/api/?name=FELINOS%20DE%20PALO%20NEGRO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ASTUDILLO RIVAS, YORMAN RAFAEL </span><span class="jug-equipo">FELINOS DE PALO NEGRO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">183.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:71 | GOP:0.99</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">28</td>
-                            <td><b style="color:#000">RAMIREZ CASTRO, JESUS DANIEL</b><br><small style="color:#666">MAMBA</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">91</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 11.5 | 🛡️Stops: 63</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#28</span><img src="https://ui-avatars.com/api/?name=FUNDACI%C3%93N%20MENDOZA&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CHIQUIN RIVERA , GABRIEL ALEJANDRO</span><span class="jug-equipo">FUNDACIÓN MENDOZA</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">179</td>
+                            <td style="text-align:right; font-size:11px;">PTS:77 | GOP:0.89</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">29</td>
-                            <td><b style="color:#000">ZAMBRANO SALCEDO, EZEQUIEL DAVID</b><br><small style="color:#666">EL TORO</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">87.3</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 5.5 | 🛡️Stops: 63</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#29</span><img src="https://ui-avatars.com/api/?name=GUARUTO&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">ROJAS  RODRIGUEZ, IVERSON JOSE</span><span class="jug-equipo">GUARUTO</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">178</td>
+                            <td style="text-align:right; font-size:11px;">PTS:72 | GOP:0.86</td>
                         </tr>
                         <tr style="background: white; border-left: none">
-                            <td style="text-align:center; font-weight:bold;">30</td>
-                            <td><b style="color:#000">CHIQUIN RIVERA , GABRIEL ALEJANDRO</b><br><small style="color:#666">FUNDACIÓN MENDOZA</small></td>
-                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">85.4</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 12.5 | 🛡️Stops: 54</td>
+                            <td><div class="jugador-flex"><span class="rank-num">#30</span><img src="https://ui-avatars.com/api/?name=CICLONES&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">CURTO BLANCO , CARLOS GABRIEL </span><span class="jug-equipo">CICLONES</span></div></div></td>
+                            <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">174.7</td>
+                            <td style="text-align:right; font-size:11px;">PTS:91 | GOP:0.99</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U16" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U16" class="btn-preseleccion" onclick="switchView('U16', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U16" class="btn-switch active-switch" onclick="switchView('U16', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U16" class="btn-switch" onclick="switchView('U16', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U16" class="btn-switch active-switch" onclick="switchView('U16', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U16" class="btn-switch" onclick="switchView('U16', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U16_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U16_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U16_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U17" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U17" class="btn-preseleccion" onclick="switchView('U17', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U17" class="btn-switch active-switch" onclick="switchView('U17', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U17" class="btn-switch" onclick="switchView('U17', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U17" class="btn-switch active-switch" onclick="switchView('U17', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U17" class="btn-switch" onclick="switchView('U17', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U17_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U17_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U17_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U18" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U18" class="btn-preseleccion" onclick="switchView('U18', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U18" class="btn-switch active-switch" onclick="switchView('U18', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U18" class="btn-switch" onclick="switchView('U18', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U18" class="btn-switch active-switch" onclick="switchView('U18', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U18" class="btn-switch" onclick="switchView('U18', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U18_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U18_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U18_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U19" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U19" class="btn-preseleccion" onclick="switchView('U19', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U19" class="btn-switch active-switch" onclick="switchView('U19', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U19" class="btn-switch" onclick="switchView('U19', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U19" class="btn-switch active-switch" onclick="switchView('U19', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U19" class="btn-switch" onclick="switchView('U19', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U19_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U19_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U19_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
         <div id="U20" class="tabcontent">
             <div class="control-panel">
                 <button id="btn_top_U20" class="btn-preseleccion" onclick="switchView('U20', 'top')">⭐ VER LISTA DE PRE-SELECCIÓN ESTATAL</button>
                 <div class="switch-container">
-                    <button id="btn_trad_U20" class="btn-switch active-switch" onclick="switchView('U20', 'trad')">📊 Tradicional (FIBA)</button>
-                    <button id="btn_adv_U20" class="btn-switch" onclick="switchView('U20', 'adv')">🧠 Avanzada (S.G.S)</button>
+                    <button id="btn_trad_U20" class="btn-switch active-switch" onclick="switchView('U20', 'trad')">📊 Tradicional</button>
+                    <button id="btn_adv_U20" class="btn-switch" onclick="switchView('U20', 'adv')">🧠 Avanzada</button>
                 </div>
             </div>
 
             <div id="U20_tradicional" class="grid-tradicional">
-                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación total acumulada</span><span class="head-formula">ƒ = Suma de Puntos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control de tableros</span><span class="head-formula">ƒ = Reb. Defensivos + Ofensivos</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
-                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de juego</span><span class="head-formula">ƒ = Pases de gol</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
-                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Manos rápidas en defensa</span><span class="head-formula">ƒ = Balones recuperados</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
+                <div class="card b-pts"><div class="card-head "><span class="head-title">Líderes en Puntos</span><span class="head-desc">Anotación Total (Auditada)</span><span class="head-formula">ƒ = Suma Puntos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">PTS</small></td></tr></table></div>
+                <div class="card b-reb"><div class="card-head "><span class="head-title">Líderes en Rebotes</span><span class="head-desc">Control Tableros (Auditado)</span><span class="head-formula">ƒ = Total Rebotes</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB</small></td></tr></table></div>
+                <div class="card b-ast"><div class="card-head "><span class="head-title">Líderes en Asistencias</span><span class="head-desc">Creación de Juego</span><span class="head-formula">ƒ = Suma Asist.</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">AST</small></td></tr></table></div>
+                <div class="card b-rob"><div class="card-head "><span class="head-title">Líderes en Robos</span><span class="head-desc">Defensa Activa</span><span class="head-formula">ƒ = Suma Robos</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">ROB</small></td></tr></table></div>
             </div>
 
             <div id="U20_avanzada" class="grid-avanzada">
-                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en el cierre (Q4 + OT)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob) - (Pérd*3 + Fallos)</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones recuperadas para el equipo</span><span class="head-formula">ƒ = Reb.Def + Robos + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
-                <div class="card b-dark"><div class="card-head "><span class="head-title">🎯 Eficiencia Ofensiva</span><span class="head-desc">Rentabilidad por tiro (Min 3 intentos)</span><span class="head-formula">ƒ = Puntos / Tiros Intentados</span></div><table></table></div>
-                <div class="card b-reb"><div class="card-head "><span class="head-title">🦍 Dominio Interior</span><span class="head-desc">Presencia física en la pintura</span><span class="head-formula">ƒ = Rebotes Totales + Tapones</span></div><table><tr><td><span class="rank-num">#1</span> <span class="jug-nombre">Jugador</span><br><span class="jug-equipo">TEAM A</span></td><td class="stat-val">0 <small style="font-size:9px; color:#999">REB+BLK</small></td></tr></table></div>
+                <div class="card b-clutch"><div class="card-head t-clutch"><span class="head-title">❄️ Factor Sangre Fría</span><span class="head-desc">Rendimiento en Cierre (Q4)</span><span class="head-formula">ƒ = (Pts+Ast+Reb/2+Rob)-(Pérd*2)</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0.0 <small style="font-size:9px; color:#999">IDX</small></td></tr></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🚀 Motor Ofensivo (G.O.P.)</span><span class="head-desc">Puntos producidos por posesión</span><span class="head-formula">ƒ = (Pts + Ast*2) / (Tiros+Ast+Pérd)</span></div><table></table></div>
+                <div class="card b-dark"><div class="card-head "><span class="head-title">🛡️ Impacto Defensivo</span><span class="head-desc">Posesiones Recuperadas</span><span class="head-formula">ƒ = Reb.Total + Robos + Tapones</span></div><table><tr><td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador</span><span class="jug-equipo">TEAM A</span></div></div></td><td class="stat-val">0 <small style="font-size:9px; color:#999">STOPS</small></td></tr></table></div>
             </div>
 
             <div id="U20_convocados" style="display:none;">
-                <h3 style="text-align:center; color:#b71c1c; text-transform:uppercase; margin-bottom:5px;">Pre-selección (Top 30 Ranking)</h3>
-                <div style="text-align:center; font-size:11px; color:#777; margin-bottom:20px; font-style:italic;">Algoritmo S.G.S: (Def*0.4) + (Of*0.3) + (Int*0.2) + (Eq*0.1) + (Clutch*0.1)</div>
+                <h3 style="text-align:center; color:#b71c1c;">Pre-selección (Top 30 Ranking)</h3>
                 <table style="width:100%; border:1px solid #ddd;">
-                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px;">RK</th><th style="text-align:left;">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES CLAVE</th></tr></thead>
+                    <thead style="background:#263238; color:white;"><tr><th style="padding:10px">JUGADOR</th><th style="text-align:center">ÍNDICE</th><th style="text-align:right">DETALLES</th></tr></thead>
                     <tbody>
                         <tr style="background: #fffde7; border-left: 4px solid #ffd700">
-                            <td style="text-align:center; font-weight:bold;">1</td>
-                            <td><b style="color:#000">Jugador, Prueba</b><br><small style="color:#666">TEAM A</small></td>
+                            <td><div class="jugador-flex"><span class="rank-num">#1</span><img src="https://ui-avatars.com/api/?name=TEAM%20A&background=random&length=2&bold=true&color=fff" class="team-logo"><div><span class="jug-nombre">Jugador, Prueba</span><span class="jug-equipo">TEAM A</span></div></div></td>
                             <td style="text-align:center; font-weight:bold; color:#b71c1c; font-size:16px;">0</td>
-                            <td style="text-align:right; font-size:11px;">❄️Clutch: 0.0 | 🛡️Stops: 0</td>
+                            <td style="text-align:right; font-size:11px;">PTS:0 | GOP:0.00</td>
                         </tr>
                     </tbody>
                 </table>
-                <p style="text-align:center; margin-top:20px; color:#999; font-size:11px;">* Los primeros 12 puestos (fondo amarillo) sugieren el núcleo principal.</p>
             </div>
         </div>
-
-        
         <script>
             function openCategoria(evt, catName) {
                 var i, tabcontent, tablinks;
@@ -635,10 +531,6 @@
                     document.getElementById('btn_top_' + catName).className += ' active-pre';
                 }
             }
-            // Abrir la primera pestaña por defecto
             window.onload = function() { if(document.getElementsByClassName("tablinks").length > 0) document.getElementsByClassName("tablinks")[0].click(); };
         </script>
-    
-    </body>
-    </html>
-    
+    </body></html>
